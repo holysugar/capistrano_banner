@@ -1,3 +1,6 @@
+require 'term/ansicolor'
+require 'thor'
+
 module CapistranoBanner
   class Base
     def initialize(env, path)
