@@ -43,7 +43,7 @@ banner
 Let's execute cap!
 
 ```
-$ cap shell                                                                                                                                (reward-server)-(master5)-(aradmin)
+$ cap shell
   '##:::'##::'#######::'##::::'##:'########:::::'###::::'########::'########::
   . ##:'##::'##.... ##: ##:::: ##: ##.... ##:::'## ##::: ##.... ##: ##.... ##:
   :. ####::: ##:::: ##: ##:::: ##: ##:::: ##::'##:. ##:: ##:::: ##: ##:::: ##:
@@ -63,7 +63,7 @@ If production environment, pause and wait your input.
 banner method can take options:
 
 - `:path => 'filepath'` path to your favor banner file
-- `:color => :colorname'` banner color
+- `:color => :colorname'` banner color (e.g. :red, :green and :blue ... see https://github.com/flori/term-ansicolor )
 - `:pause => true` anyway pause
 - `:force => true` don't pause even if production env
 
