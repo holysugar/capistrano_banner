@@ -31,6 +31,7 @@ $ artii --font=banner3-D yourapp > config/banner.txt
 Then, call banner method in the bottom of your deploy.rb
 
 ```ruby
+require 'capistrano_banner' # if you wouldn't use bundle exec
 set :rails_env, 'production'
 set :deploy_to, '/u/apps/yourapp'
 
