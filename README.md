@@ -18,21 +18,22 @@ Or install it yourself as:
 
 ## Usage
 
-First, you need create your application banner in config/banner.txt
+First, create your application banner in config/banner.txt.
 
-like this:
+Like this:
 
 ```zsh
 $ gem install artii
-$ rehash
 $ artii --font=banner3-D yourapp > config/banner.txt
 ```
+
+(about artii: https://github.com/miketierney/artii )
 
 Then, call banner method in the bottom of your deploy.rb
 
 ```ruby
-require 'capistrano_banner' # if you wouldn't use bundle exec
-set :rails_env, 'production'
+require 'capistrano_banner'  # if you wouldn't use bundle exec
+set :rails_env, 'production' # rails_env or rack_env must be fixed before call banner
 set :deploy_to, '/u/apps/yourapp'
 
 # :
@@ -57,7 +58,7 @@ $ cap shell
   This is production environment. Are you ready? (y/N) > 
 ```
 
-If production environment, pause and wait your input.
+In production environment, capistarano pauses and waits your input.
 
 ## Options
 
@@ -67,6 +68,13 @@ banner method can take options:
 - `:color => :colorname'` banner color (e.g. :red, :green and :blue ... see https://github.com/flori/term-ansicolor )
 - `:pause => true` anyway pause
 - `:force => true` don't pause even if production env
+
+
+## Etc
+
+### multistage
+
+If you use capistrano/ext/multistage, you need write `banner` method call to *all* stages. capistrano_banner needs rails_env or rack_env (or recognizes as production environment).
 
 ## Contributing
 
