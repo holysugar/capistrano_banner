@@ -51,7 +51,7 @@ module CapistranoBanner
   module IntegrationMethods
     def banner(options = {})
       path = self[:banner_path] || "./config/banner.txt"
-      env  = self[:rack_env] || self[:rails_env] || (raise "rails_env or rack_env is required.") # FIXME: or somthing else?
+      env  = self[:rack_env] || self[:rails_env] || (raise "rails_env or rack_env is required.") # FIXME: or anything else?
 
       Base.new(env, path).print_banner(options)
     end
