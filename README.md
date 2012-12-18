@@ -74,7 +74,7 @@ banner method can take options:
 
 ### multistage
 
-If you use capistrano/ext/multistage, you need write `banner` method call to *all* stages. capistrano_banner needs rails_env or rack_env (or recognizes as production environment).
+If you use capistrano/ext/multistage, you need write `banner` method call to *all* stages. capistrano_banner requires to set :rails_env or :rack_env before `banner`.
 
 ## Contributing
 
