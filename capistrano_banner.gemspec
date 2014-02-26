@@ -6,10 +6,10 @@ require 'capistrano_banner/version'
 Gem::Specification.new do |gem|
   gem.name          = "capistrano_banner"
   gem.version       = CapistranoBanner::VERSION
-  gem.authors       = ["HORII Keima"]
-  gem.email         = ["holysugar@gmail.com"]
+  gem.authors       = ["HORII Keima", "KONDO Uchio"]
+  gem.email         = ["holysugar@gmail.com", "udzura@udzura.jp"]
   gem.description   = %q{capistrano application banner}
-  gem.summary       = %q{provids banner method to display application banner}
+  gem.summary       = %q{provides a task to display application banner}
   gem.homepage      = "https://github.com/holysugar/capistrano_banner"
 
   gem.files         = `git ls-files`.split($/)
@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_runtime_dependency 'capistrano'
+  gem.add_runtime_dependency 'capistrano', '=> 3.0.0'
   gem.add_runtime_dependency 'term-ansicolor'
   gem.add_runtime_dependency 'thor'
 end
