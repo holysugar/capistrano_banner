@@ -1,11 +1,12 @@
 require 'term/ansicolor'
-require 'thor'
+require 'highline'
 
 module CapistranoBanner
   class Base
     def initialize(env, path)
       @env = env
       @path = path
+      @ui = HighLine.new
     end
 
     def banner
@@ -17,10 +18,10 @@ module CapistranoBanner
     end
 
     def pause
-      exit unless Thor::Shell::Basic.new.yes?(prompt)
+      exit unless @ui.agree(prompt)
     end
 
-    def  prompt
+    def prompt
       "This is #{Term::ANSIColor.red @env} environment. Are you ready? (y/N) >"
     end
 
