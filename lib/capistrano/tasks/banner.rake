@@ -9,4 +9,6 @@ namespace :deploy do
 
     CapistranoBanner::Base.new(stage, path).print_banner(options)
   end
+
+  before :starting, :banner
 end
