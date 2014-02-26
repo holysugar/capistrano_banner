@@ -3,8 +3,8 @@ require 'highline'
 
 module CapistranoBanner
   class Base
-    def initialize(env, path)
-      @env = env
+    def initialize(stage, path)
+      @stage = stage
       @path = path
       @ui = HighLine.new
     end
@@ -22,16 +22,16 @@ module CapistranoBanner
     end
 
     def prompt
-      "This is #{Term::ANSIColor.red @env} environment. Are you ready? (y/N) >"
+      "This is #{Term::ANSIColor.send(color, @stage.to_s)} stage. Are you ready? (y/N) >"
     end
 
     def color(overwrite = nil)
       return overwrite if overwrite
 
-      case @env
-      when 'production'  ; :red
-      when 'development' ; :green
-      else 'yellow'      ; :yellow
+      case @stage
+      when :production ; :red
+      when :staging    ; :yellow
+      else :green      ; :green
       end
     end
 
