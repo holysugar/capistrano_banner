@@ -1,11 +1,12 @@
 require 'term/ansicolor'
-require 'thor'
+require 'highline'
 
 module CapistranoBanner
   class Base
-    def initialize(env, path)
-      @env = env
+    def initialize(stage, path)
+      @stage = stage
       @path = path
+      @ui = HighLine.new
     end
 
     def banner
@@ -17,20 +18,20 @@ module CapistranoBanner
     end
 
     def pause
-      exit unless Thor::Shell::Basic.new.yes?(prompt)
+      exit unless @ui.agree(prompt)
     end
 
-    def  prompt
-      "This is #{Term::ANSIColor.red @env} environment. Are you ready? (y/N) >"
+    def prompt
+      "This is #{Term::ANSIColor.send(color, @stage.to_s)} stage. Are you ready? (y/N) >"
     end
 
     def color(overwrite = nil)
       return overwrite if overwrite
 
-      case @env
-      when 'production'  ; :red
-      when 'development' ; :green
-      else 'yellow'      ; :yellow
+      case @stage
+      when :production ; :red
+      when :staging    ; :yellow
+      else :green      ; :green
       end
     end
 
@@ -48,12 +49,7 @@ module CapistranoBanner
     end
   end
 
-  module IntegrationMethods
-    def banner(options = {})
-      path = self[:banner_path] || "./config/banner.txt"
-      env  = self[:rack_env] || self[:rails_env] || (raise "rails_env or rack_env is required.") # FIXME: or anything else?
-
-      Base.new(env, path).print_banner(options)
-    end
+  def self.banner(banner_path = "./config/banner.txt", stage = fetch(:stage), options = {})
+    Base.new(stage, banner_path).print_banner(options)
   end
 end

@@ -1,20 +1,22 @@
-# CapistranoBanner
+# capistrano_banner
 
-display application banner, and pause in production environment
+`capistrano_banner` displays application banner, and pause in production stage
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Gemfile:
 
     gem 'capistrano_banner'
 
-And then execute:
+Then:
 
     $ bundle
 
-Or install it yourself as:
+### Note
 
-    $ gem install capistrano_banner
+After version 0.1.0, `capistrano_banner` works well just with capistrano >= 3.
+
+If you're using capistrano =< 2, please use this gem versioned 0.0.x
 
 ## Usage
 
@@ -29,23 +31,18 @@ $ artii --font=banner3-D yourapp > config/banner.txt
 
 (about artii: https://github.com/miketierney/artii )
 
-Then, call banner method in the bottom of your deploy.rb
+Then enable in Capfile:
 
-```ruby
-require 'capistrano_banner'  # if you wouldn't use bundle exec
-set :rails_env, 'production' # rails_env or rack_env must be fixed before call banner
-set :deploy_to, '/u/apps/yourapp'
+    require 'capistrano/banner'
 
-# :
-# :
+This line hooks `deploy:banner` task just before `deploy:starting`.
 
-banner
-```
+See also [capistrano(3) flow](http://capistranorb.com/documentation/getting-started/flow/).
 
-Let's execute cap!
+After all, let's execute cap!
 
 ```
-$ cap shell
+$ cap production deploy
   '##:::'##::'#######::'##::::'##:'########:::::'###::::'########::'########::
   . ##:'##::'##.... ##: ##:::: ##: ##.... ##:::'## ##::: ##.... ##: ##.... ##:
   :. ####::: ##:::: ##: ##:::: ##: ##:::: ##::'##:. ##:: ##:::: ##: ##:::: ##:
@@ -55,26 +52,34 @@ $ cap shell
   ::: ##::::. #######::. #######:: ##:::. ##: ##:::: ##: ##:::::::: ##::::::::
   :::..::::::.......::::.......:::..:::::..::..:::::..::..:::::::::..:::::::::
 
-  This is production environment. Are you ready? (y/N) > 
+  This is production stage. Are you ready? (y/N) > 
 ```
 
-In production environment, capistarano pauses and waits your input.
+In production stage, capistarano pauses and waits your input.
+
+### Custom banner hook
+
+In another way, you can call banner method in your task:
+
+```
+task :foobar do
+  CapistranoBanner.banner("./config/custom.txt")
+end
+```
 
 ## Options
 
-banner method can take options:
+`capistrano_banner` respects some capistrano settings:
 
-- `:path => 'filepath'` path to your favor banner file
-- `:color => :colorname'` banner color (e.g. :red, :green and :blue ... see https://github.com/flori/term-ansicolor )
-- `:pause => true` anyway pause
-- `:force => true` don't pause even if production env
+- `:banner_path` : A path to banner source file. Default to `"./config/banner.txt"`
+- `:banner_options` : Set specifc banner options with Hash:
+    - `:color => :colorname'` banner color (e.g. :red, :green and :blue ... see https://github.com/flori/term-ansicolor )
+    - `:pause => true` anyway pause
+    - `:force => true` don't pause even if production env
 
+## LICENSE
 
-## Etc
-
-### multistage
-
-If you use capistrano/ext/multistage, you need write `banner` method call to *all* stages. capistrano_banner requires to set :rails_env or :rack_env before `banner`.
+See LICENSE.txt.
 
 ## Contributing
 
