@@ -10,7 +10,13 @@ module CapistranoBanner
     end
 
     def banner
-      File.read(@path)
+      if @path.end_with? ".erb"
+        require 'erb'
+        template = File.read(@path)
+        ERB.new(template).result
+      else
+        File.read(@path)
+      end
     end
 
     def color_banner(color)
@@ -49,7 +55,10 @@ module CapistranoBanner
     end
   end
 
-  def self.banner(banner_path = "./config/banner.txt", stage = fetch(:stage), options = {})
+  def self.banner(banner_path = nil, stage = fetch(:stage), options = {})
+    banner_path ||= (
+      File.exist?("./config/banner.txt.erb") ? "./config/banner.txt.erb" : "./config/banner.txt"
+    )
     Base.new(stage, banner_path).print_banner(options)
   end
 end
