@@ -1,16 +1,16 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'capistrano_banner/version'
+require 'capistrano-banner/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "capistrano_banner"
+  gem.name          = "capistrano-banner"
   gem.version       = CapistranoBanner::VERSION
   gem.authors       = ["HORII Keima", "KONDO Uchio"]
   gem.email         = ["holysugar@gmail.com", "udzura@udzura.jp"]
   gem.description   = %q{capistrano application banner}
   gem.summary       = %q{provides a task to display application banner}
-  gem.homepage      = "https://github.com/holysugar/capistrano_banner"
+  gem.homepage      = "https://github.com/holysugar/capistrano-banner"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

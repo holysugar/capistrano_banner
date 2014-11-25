@@ -1,4 +1,4 @@
-require 'capistrano_banner/base'
+require 'capistrano-banner/base'
 
 namespace :deploy do
   desc 'Show banner of service'

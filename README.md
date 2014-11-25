@@ -1,12 +1,12 @@
-# capistrano_banner
+# capistrano-banner
 
-`capistrano_banner` displays application banner, and pause in production stage
+`capistrano-banner` displays application banner, and pause in production stage
 
 ## Installation
 
 Gemfile:
 
-    gem 'capistrano_banner'
+    gem 'capistrano-banner'
 
 Then:
 
@@ -14,7 +14,7 @@ Then:
 
 ### Note
 
-After version 0.1.0, `capistrano_banner` works well just with capistrano >= 3.
+After version 0.1.0, `capistrano-banner` works well just with capistrano >= 3.
 
 If you're using capistrano =< 2, please use this gem versioned 0.0.x
 
@@ -69,7 +69,7 @@ end
 
 ## Options
 
-`capistrano_banner` respects some capistrano settings:
+`capistrano-banner` respects some capistrano settings:
 
 - `:banner_path` : A path to banner source file. Default to `"./config/banner.txt"`
 - `:banner_options` : Set specifc banner options with Hash:
