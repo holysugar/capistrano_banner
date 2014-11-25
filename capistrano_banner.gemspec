@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  spec.post_install_message = <<MESSAGE
+  gem.post_install_message = <<MESSAGE
 Gem name `capistrano_banner' is deprecated for Capistrano 3
 and we have installed new `capistrano-banner' gem.
 Please switch your Gemfile to
